@@ -15,51 +15,51 @@ class Main extends PluginBase implements Listener{
         $this->getLogger()->info("SkyBlockUI Enabled!\n\nThis plugin made by CrazyTeamVN");
     }
 
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
-        $player = $sender->getPlayer();
-        switch($command->getName()){
-            case "skyblockui":
-            case "sbui":
+    public function onCommand(CommandSender $player, Command $command, string $label, array $args) : bool{
+        $player = $player->getPlayer();
+        if($command->getName == "sbui"){
                 $this->menuForm($player);
-        }
-        return true;
     }
+  }
 
     public function menuForm(Player $player){
         if($player instanceof Player){
             $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-            $form = $api->createSimpleForm(function (Player $sender, array $data){
+            $form = $api->createSimpleForm(function (Player $player, array $data){
                 if(isset($data[0])){
                     switch($data[0]){
                         case 0:
                             //Back to Home 1
-                        $this->getServer()->getCommandMap()->dispatch($sender, "sb home 1");
+                        $this->getServer()->getCommandMap()->dispatch($player, "skyblock home 1");
                             break;
                         case 1:
                             //Back to Home 2
-                        $this->getServer()->getCommandMap()->dispatch($sender, "sb home 2");
+                        $this->getServer()->getCommandMap()->dispatch($player, "skyblock home 2");
                             break;
                         case 2:
                             //Claim Island
-                        $this->getServer()->getCommandMap()->dispatch($sender, "sb claim");
+                        $this->getServer()->getCommandMap()->dispatch($player, "skyblock claim");
                             break;
                         case 3:
-                            //Addhelper
-                            $this->addhelperForm($sender);
+                        $this->getServer()->getCommandMap()->dispatch($player, "skyblock auto");
                             break;
                         case 4:
-                            $this->removehelperForm($sender);
+                            //Addhelper
+                            $this->addhelperForm($player);
                             break;
                         case 5:
-                            //Give Island to a Player
-                            $this->giveForm($sender);
+                            $this->removehelperForm($player);
+                            break;
                         case 6:
-                            //Warp to an island
-                            $this->warpForm($sender);
+                            //Give Island to a Player
+                            $this->giveForm($player);
                         case 7:
-                            //Info of island player standing on
-                            $this->getServer()->getCommandMap()->dispatch($sender, "sb info");
+                            //Warp to an island
+                            $this->warpForm($player);
                         case 8:
+                            //Info of island player standing on
+                            $this->getServer()->getCommandMap()->dispatch($player, "skyblock info");
+                        case 9:
                             //Exit
                             break;
                     }
@@ -69,6 +69,7 @@ class Main extends PluginBase implements Listener{
             $form->setContent("§aPlease choose an action to use!");
             $form->addButton("§a§oHome 1");
             $form->addButton("§a§oHome 2");
+            $form->addButton("§a§oAuto");
             $form->addButton("§a§oClaim");
             $form->addButton("§a§oAdd Helper");
             $form->addButton("§a§oRemove Helper");
@@ -90,7 +91,7 @@ class Main extends PluginBase implements Listener{
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
-                $this->getServer()->getCommandMap()->dispatch($player, "sb addhelper " . $this->playerName);
+                $this->getServer()->getCommandMap()->dispatch($player, "skyblock addhelper " . $this->playerName);
             }
         });
         $form->setTitle(TextFormat::GREEN . "Add Helper");
@@ -105,7 +106,7 @@ class Main extends PluginBase implements Listener{
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
-                $this->getServer()->getCommandMap()->dispatch($player, "sb remove " . $this->playerName);
+                $this->getServer()->getCommandMap()->dispatch($player, "skyblock removehelper " . $this->playerName);
             }
         });
         $form->setTitle(TextFormat::GREEN . "Remove Helper");
@@ -120,7 +121,7 @@ class Main extends PluginBase implements Listener{
             $result = $data[0];
             if($result != null){
                 $this->playerName = $result;
-                $this->getServer()->getCommandMap()->dispatch($player, "sb give " . $this->playerName);
+                $this->getServer()->getCommandMap()->dispatch($player, "skyblock give " . $this->playerName);
             }
         });
         $form->setTitle(TextFormat::GREEN . "Give");
@@ -135,7 +136,7 @@ class Main extends PluginBase implements Listener{
             $result = $data[0];
             if($result != null){
                 $this->island = $result;
-                $this->getServer()->getCommandMap()->dispatch($player, "sb warp " . $this->island);
+                $this->getServer()->getCommandMap()->dispatch($player, "skyblock warp " . $this->island);
             }
         });
         $form->setTitle(TextFormat::GREEN . "Warp");
