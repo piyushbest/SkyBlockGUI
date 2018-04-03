@@ -1,11 +1,9 @@
-name: SkyBlockUI
-main: SkyBlock\Main
+name: SkyBlockGUI
+main: CrazyTeamVN\SkyBlock\Main
 version: 1.0.2
 api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11]
-author: CrazyTeam
+author: CrazyTeamVN
 
 commands:
- skyblockui:
-  description: "Open SkyBlock GUI"
  sbui:
   description: "Open SkyBlock GUI"
