@@ -1,0 +1,7 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/piyushbest/SkyBlockUI-2
+branches:
+- master
+projects:
+  SkyBlockUI-2:
+    path: ""
+...
