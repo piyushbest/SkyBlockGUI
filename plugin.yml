@@ -7,9 +7,3 @@ author: CrazyTeamVN
 commands:
  sbui:
   description: "Open SkyBlock MENU"
-commands:
- is:
-  description: "Open SkyBlock MENU"
-commands:
- sb:
-  description: "Open SkyBlock MENU"
